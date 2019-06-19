@@ -1,0 +1,1 @@
+web: gunicorn FlaskWebProject2.wsgi:app --log-file -
