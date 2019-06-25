@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sentiment Analysis</title>
+
+   </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" method="post" action="/process">
+        <h2 class="form-signin-heading">Enter Text for Sentiment</h2>
+
+        <div class="form-group">
+          <label for="comment" class="sr-only">comment:</label>
+            <textarea class="form-control" name="comment" rows="10" id="comment" placeholder="comment" required></textarea>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Okay</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
+{% endblock %}
