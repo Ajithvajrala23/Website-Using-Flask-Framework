@@ -12,28 +12,46 @@
     <!-- Bootstrap theme -->
     <link href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" rel="stylesheet">
 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
 
 </head>
 <body>
     <div class="container theme-showcase" role="main">
-
-      <div class="jumbotron">
-        <a type="button" class="btn btn-link" href="{{ url_for('text') }}">Go to Sentiment Analysis again</a>
-      </div>
+      <p> </p>
+      <p><a type="button" class="btn btn-link" href="{{ url_for('text') }}">Go to Sentiment Analysis again</a></p>
       <div class="well">
         <p>{{ comment }}</p>
-      </div>
-      <div class="well">
-        <p>The positive percent is {{ positive*100 }}</p>
-      </div>
-      <div class="well">
-        <p>The Neutral percent is {{ neutral*100 }}</p>
-      </div>
-      <div class="well">
-        <p>The Negative percent is {{ negative*100 }}</p>
+        <p>Positive percent is {{ positive*100 }}</p>
+        <p>Neutral percent is {{ neutral*100 }}</p>
+        <p>Negative percent is {{ negative*100 }}</p>
       </div>
     </div> <!-- /container -->
 </body>
+
+<body>
+
+    <canvas id="chart" width="600" height="400"></canvas>
+    <script>
+      var pieData = [
+        {% for item, label, colors in set %}
+          {
+            value: {{item}},
+            label: "{{label}}",
+            color : "{{colors}}"
+          },
+        {% endfor %}
+      ];
+      // get bar chart canvas
+      var mychart = document.getElementById("chart").getContext("2d");
+      steps = 10
+      max = {{ max }}
+      // draw pie chart
+      new Chart(document.getElementById("chart").getContext("2d")).Pie(pieData);
+    </script>
+</body>
+
+
 </html>
 
 {% endblock %}

@@ -8,16 +8,16 @@ import os
 import requests
 import operator
 import re
-import nltk
+#import nltk
 from flask import Flask, render_template, request, send_file
 from collections import Counter
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 #from textblob import TextBlob
-import matplotlib.pyplot as plt
 import numpy as np
-from textblob.sentiments import NaiveBayesAnalyzer
+#from textblob.sentiments import NaiveBayesAnalyzer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
+import matplotlib.pyplot as plt
+#import base64
 
 analyser = SentimentIntensityAnalyzer()
 
@@ -49,6 +49,7 @@ def calculate_sentimet(comment):
     neutral = score['neu']
 
     return positive,neutral,  negative
+
 
 @app.route('/')
 @app.route('/home')
@@ -98,13 +99,16 @@ def text():
 def process():
 
     comment = request.form['comment']
-
-    positive,neutral,  negative = calculate_sentimet(comment)
+    positive, neutral,  negative = calculate_sentimet(comment)
+    pie_labels = ['Positive' ,'Neutral',  'Negative']
+    pie_values = [positive*100, neutral*100, negative*100]
+    colors = ['green', 'orange', 'red']
 
     return render_template('sentiment.html', comment = comment,
                            positive = positive, neutral = neutral,
-                           negative= negative)
-
+                           negative= negative,
+                           max=17000,
+                           set=zip(pie_values, pie_labels, colors))
 
 
 @app.route('/me', methods=['GET', 'POST'])

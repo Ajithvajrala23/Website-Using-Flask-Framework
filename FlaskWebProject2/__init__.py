@@ -7,17 +7,16 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask import request
 import requests
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 from collections import Counter
-import nltk
+#import nltk
 import re
-nltk.download('punkt')
+#nltk.download('punkt')
 import operator
-
-import nltk
-from nltk.corpus import stopwords
-nltk.download('stopwords')
-stops = stopwords.words('english')
+#import nltk
+#from nltk.corpus import stopwords
+#nltk.download('stopwords')
+#stops = stopwords.words('english')
 
 app = Flask(__name__)
 
